@@ -3,6 +3,10 @@ import os
 
 app = Flask(__name__)
 
+
+
+
+
 def read_description(file_name):
     """Reads the description from a text file, or returns a default message if the file is missing."""
     file_path = os.path.join("TextForArtifacts", file_name)
@@ -10,6 +14,10 @@ def read_description(file_name):
         with open(file_path, 'r', encoding='utf-8') as file:
             return file.read().strip()
     return "Description not available."
+
+
+
+
 
 @app.route('/')
 def homePage():
@@ -20,8 +28,8 @@ def say_hi():
     return render_template('artifact_template.html', 
                            artifact_title="Say Hi, You're on Camera",
                            artifact_description=read_description("SayHi.txt"),
-                           image_url_1="static/images/say_hi_camera.jpg",
-                           image_url_2="static/images/surveillance_sign.jpg")
+                           image_url_1="static/images/say_hi_camera_1.jpg",
+                           image_url_2="static/images/say_hi_camera_2.jpg")
 
 @app.route('/susunu')
 def susunu():
