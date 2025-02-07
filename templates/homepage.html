@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Surveillance Artifacts - Modern World History</title>
   <style>
+    /* Base Styles */
     body {
       font-family: 'Arial', sans-serif;
       background: linear-gradient(to right, #1a1a2e, #16213e);
@@ -19,7 +20,7 @@
       background: linear-gradient(to right, #ff7e5f, #feb47b);
       -webkit-background-clip: text;
       color: transparent;
-      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+      text-shadow: 3px 3px 10px rgba(0,0,0,0.3);
     }
     .overview-box {
       background-color: rgba(255, 255, 255, 0.15);
@@ -28,20 +29,20 @@
       max-width: 1000px;
       margin: 40px auto;
       padding: 30px;
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.3);
     }
     .overview-box h2 {
       font-size: 2.8em;
       color: #ffcc70;
       margin-bottom: 15px;
-      text-shadow: 2px 2px 10px rgba(255, 204, 112, 0.8);
+      text-shadow: 2px 2px 10px rgba(255,204,112,0.8);
     }
     .overview-box p {
       font-size: 1.4em;
       color: #e0e0e0;
       line-height: 1.6;
-      text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.1);
+      text-shadow: 1px 1px 5px rgba(255,255,255,0.1);
     }
     .group-container {
       margin: 50px auto;
@@ -53,8 +54,8 @@
       font-size: 2.5em;
       margin-bottom: 20px;
       color: #ffcc70;
-      text-shadow: 2px 2px 10px rgba(255, 204, 112, 0.8);
-      border-bottom: 2px solid rgba(255, 204, 112, 0.5);
+      text-shadow: 2px 2px 10px rgba(255,204,112,0.8);
+      border-bottom: 2px solid rgba(255,204,112,0.5);
       padding-bottom: 10px;
     }
     .artifact-row {
@@ -68,8 +69,8 @@
       border-radius: 10px;
       padding: 20px;
       flex: 1 1 calc(33.33% - 20px);
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.3);
       text-align: center;
       min-width: 280px;
       margin-bottom: 20px;
@@ -90,12 +91,50 @@
       line-height: 1.6;
       color: #e0e0e0;
     }
+    .transition-container {
+      margin: 30px auto;
+      width: 80%;
+      max-width: 1200px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.10);
+      border-radius: 10px;
+      border: 2px solid rgba(255,255,255,0.2);
+      text-align: center;
+      font-size: 1.2em;
+      line-height: 1.6;
+      color: #e0e0e0;
+      margin-bottom: 50px;
+    }
+    .live-container {
+      margin: 50px auto;
+      width: 80%;
+      max-width: 1200px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.10);
+      border-radius: 10px;
+      border: 2px solid rgba(255,255,255,0.2);
+      text-align: center;
+      color: #e0e0e0;
+      margin-bottom: 50px;
+    }
+    .live-container h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #ffcc70;
+      text-shadow: 2px 2px 10px rgba(255,204,112,0.8);
+    }
+    .live-container video {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
     .footer {
       margin-top: 40px;
       padding: 15px;
       font-size: 1em;
       color: #ffcc70;
-      text-shadow: 1px 1px 5px rgba(255, 204, 112, 0.7);
+      text-shadow: 1px 1px 5px rgba(255,204,112,0.7);
     }
     .footer p {
       margin: 10px;
@@ -131,10 +170,38 @@
       {% endfor %}
     </div>
   </div>
+  {% if not loop.last %}
+  <div class="transition-container">
+    <p>{{ transition_texts[loop.index0] }}</p>
+  </div>
+  {% endif %}
   {% endfor %}
-
+  
+  <!-- Live Camera Feed Section -->
+  <div class="live-container">
+    <h2>Live Camera Feed</h2>
+    <video class="live-video" autoplay playsinline muted></video>
+  </div>
+  
   <div class="footer">
     <p>&copy; 2025 Max Blanksby | Atef Siddiqui | Modern World History - Surveillance and Anthropology</p>
   </div>
+  
+  <!-- JavaScript to capture and display the live camera feed -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const liveVideo = document.querySelector('.live-video');
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function(stream) {
+            liveVideo.srcObject = stream;
+          })
+          .catch(function(error) {
+            console.error("Error accessing the camera:", error);
+            liveVideo.outerHTML = '<p>Unable to access camera.</p>';
+          });
+      }
+    });
+  </script>
 </body>
 </html>

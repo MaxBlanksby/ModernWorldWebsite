@@ -101,19 +101,12 @@ def homePage():
                     "link": "/susunu",
                     "image_url": "static/images/denpa_shonen_1.jpg",
                     "description": excerpt(read_description("SusunuDenpaiShonen.txt"))
-                },
-                {
-                    "title": "Coming Soon",
-                    "link": "#",
-                    "image_url": "static/images/coming_soon.jpg",
-                    "description": "New artifact information coming soon."
                 }
             ]
         }
     ]
     
-    # Read transitions from text files.
-    # One transition per gap between artifact groups (so for 4 groups, we expect 3 transitions).
+    # Read transitions from text files (one per gap between artifact groups)
     transition_texts = []
     for i in range(1, len(artifact_groups)):
         transition_texts.append(read_description(f"transition{i}.txt"))
