@@ -3,10 +3,6 @@ import os
 
 app = Flask(__name__)
 
-
-
-
-
 def read_description(file_name):
     """Reads the description from a text file, or returns a default message if the file is missing."""
     file_path = os.path.join("TextForArtifacts", file_name)
@@ -15,13 +11,114 @@ def read_description(file_name):
             return file.read().strip()
     return "Description not available."
 
-
-
-
-
 @app.route('/')
 def homePage():
-    return render_template('homepage.html')
+    # For the homepage, we show a short excerpt from each artifact's full description.
+    def excerpt(text, length=150):
+        return (text[:length] + "...") if len(text) > length else text
+
+    artifact_groups = [
+        {
+            "group_title": "Early Basis of Surveillance / Base Theory",
+            "artifacts": [
+                {
+                    "title": "Panopticon",
+                    "link": "/panopticon",
+                    "image_url": "static/images/panopticon_1.jpg",
+                    "description": excerpt(read_description("Panopticon.txt"))
+                },
+                {
+                    "title": "Big Brother (1984)",
+                    "link": "/big_brother",
+                    "image_url": "static/images/big_brother_1.jpg",
+                    "description": excerpt(read_description("BigBrother.txt"))
+                },
+                {
+                    "title": "The Truman Show",
+                    "link": "/trumanshow",
+                    "image_url": "static/images/truman_show_1.jpg",
+                    "description": excerpt(read_description("TrumanShow.txt"))
+                }
+            ]
+        },
+        {
+            "group_title": "The Rise of Mass Surveillance Technologies",
+            "artifacts": [
+                {
+                    "title": "CCTV",
+                    "link": "/cctv",
+                    "image_url": "static/images/cctv_1.jpg",
+                    "description": excerpt(read_description("CCTV.txt"))
+                },
+                {
+                    "title": "Body Cams",
+                    "link": "/body_cams",
+                    "image_url": "static/images/body_cam_1.jpg",
+                    "description": excerpt(read_description("BodyCams.txt"))
+                },
+                {
+                    "title": "Smart City Surveillance",
+                    "link": "/smart_city",
+                    "image_url": "static/images/smart_city_1.jpg",
+                    "description": excerpt(read_description("SmartCity.txt"))
+                }
+            ]
+        },
+        {
+            "group_title": "Digital & Personal Surveillance",
+            "artifacts": [
+                {
+                    "title": "Smart Doorbells",
+                    "link": "/smart_doorbells",
+                    "image_url": "static/images/smart_doorbell_1.jpg",
+                    "description": excerpt(read_description("SmartDoorbells.txt"))
+                },
+                {
+                    "title": "Smile to Pay",
+                    "link": "/smile_to_pay",
+                    "image_url": "static/images/smile_to_pay_1.jpg",
+                    "description": excerpt(read_description("SmileToPay.txt"))
+                },
+                {
+                    "title": "The Great Firewall",
+                    "link": "/great_firewall",
+                    "image_url": "static/images/great_firewall_1.jpg",
+                    "description": excerpt(read_description("GreatFirewall.txt"))
+                }
+            ]
+        },
+        {
+            "group_title": "Surveillance in Entertainment & Reality",
+            "artifacts": [
+                {
+                    "title": "Say Hi, You're on Camera",
+                    "link": "/say_hi",
+                    "image_url": "static/images/say_hi_camera_1.jpg",
+                    "description": excerpt(read_description("SayHi.txt"))
+                },
+                {
+                    "title": "Susunu! Denpa Shōnen",
+                    "link": "/susunu",
+                    "image_url": "static/images/denpa_shonen_1.jpg",
+                    "description": excerpt(read_description("SusunuDenpaiShonen.txt"))
+                },
+                {
+                    "title": "Coming Soon",
+                    "link": "#",
+                    "image_url": "static/images/coming_soon.jpg",
+                    "description": "New artifact information coming soon."
+                }
+            ]
+        }
+    ]
+    
+    # Read transitions from text files.
+    # One transition per gap between artifact groups (so for 4 groups, we expect 3 transitions).
+    transition_texts = []
+    for i in range(1, len(artifact_groups)):
+        transition_texts.append(read_description(f"transition{i}.txt"))
+    
+    return render_template('homepage.html', artifact_groups=artifact_groups, transition_texts=transition_texts)
 
 @app.route('/say_hi')
 def say_hi():
