@@ -19,16 +19,16 @@
       max-width: 800px;
       margin: 50px auto 40px;
       padding: 20px;
-      background-color: rgba(255,255,255,0.15);
+      background-color: rgba(255, 255, 255, 0.15);
       border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      border: 2px solid rgba(255,255,255,0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.3);
     }
     h1 {
       font-size: 2.8em;
       margin-bottom: 20px;
       color: #ffcc70;
-      text-shadow: 2px 2px 10px rgba(255,204,112,0.8);
+      text-shadow: 2px 2px 10px rgba(255, 204, 112, 0.8);
     }
     .artifact-image {
       width: 100%;
@@ -40,9 +40,70 @@
       line-height: 1.6;
       text-align: left;
     }
+    /* Eyeballs (Fixed in Top Left) */
+    .eye-container {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+    }
+    .eye {
+      width: 50px;
+      height: 50px;
+      background: white;
+      border: 2px solid black;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+    .pupil {
+      width: 20px;
+      height: 20px;
+      background: black;
+      border-radius: 50%;
+      position: absolute;
+      top: calc(50% - 10px);
+      left: calc(50% - 10px);
+      transition: transform 0.1s;
+    }
+    /* Eyelid for Blinking */
+    .eyelid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      animation: blink 5s infinite;
+    }
+    @keyframes blink {
+      0%, 90%, 100% {
+        opacity: 0;
+      }
+      95% {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Eyeballs that follow the cursor -->
+  <div class="eye-container">
+    <div class="eye">
+      <div class="pupil"></div>
+      <div class="eyelid"></div>
+    </div>
+    <div class="eye">
+      <div class="pupil"></div>
+      <div class="eyelid"></div>
+    </div>
+  </div>
+
   <div class="container">
     <h1>{{ artifact_title }}</h1>
     <img class="artifact-image" src="{{ image_url_1 }}" alt="{{ artifact_title }} Image 1">
@@ -51,5 +112,22 @@
     </div>
     <img class="artifact-image" src="{{ image_url_2 }}" alt="{{ artifact_title }} Image 2">
   </div>
+  
+  <script>
+    // Eyeball Movement: Update pupils based on cursor movement.
+    document.addEventListener('mousemove', function(event) {
+      document.querySelectorAll('.eye').forEach(function(eye) {
+        const pupil = eye.querySelector('.pupil');
+        const rect = eye.getBoundingClientRect();
+        const eyeX = rect.left + rect.width / 2;
+        const eyeY = rect.top + rect.height / 2;
+        const angle = Math.atan2(event.clientY - eyeY, event.clientX - eyeX);
+        const maxOffset = 10; // Maximum pupil movement in pixels
+        const offsetX = Math.cos(angle) * maxOffset;
+        const offsetY = Math.sin(angle) * maxOffset;
+        pupil.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      });
+    });
+  </script>
 </body>
 </html>

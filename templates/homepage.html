@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Surveillance Artifacts - Modern World History</title>
   <style>
     /* Base Styles */
@@ -115,7 +115,7 @@
       border: 2px solid rgba(255,255,255,0.2);
       text-align: center;
       color: #e0e0e0;
-      margin-bottom: 50px;
+      margin-bottom: 20px;
     }
     .live-container h2 {
       font-size: 2.5em;
@@ -129,6 +129,22 @@
       border-radius: 5px;
       margin: 10px 0;
     }
+    .location-container {
+      margin: 20px auto;
+      width: 80%;
+      max-width: 1200px;
+      padding: 10px;
+      background-color: rgba(255,255,255,0.10);
+      border-radius: 10px;
+      border: 2px solid rgba(255,255,255,0.2);
+      text-align: center;
+      color: #e0e0e0;
+    }
+    .location-container h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #ffcc70;
+    }
     .footer {
       margin-top: 40px;
       padding: 15px;
@@ -139,19 +155,77 @@
     .footer p {
       margin: 10px;
     }
+    /* Eyeballs (Fixed in Top Left with Blinking) */
+    .eye-container {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      display: flex;
+      gap: 10px;
+    }
+    .eye {
+      width: 50px;
+      height: 50px;
+      background: white;
+      border: 2px solid black;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+    .pupil {
+      width: 20px;
+      height: 20px;
+      background: black;
+      border-radius: 50%;
+      position: absolute;
+      top: calc(50% - 10px);
+      left: calc(50% - 10px);
+      transition: transform 0.1s;
+    }
+    .eyelid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      animation: blink 5s infinite;
+    }
+    @keyframes blink {
+      0%, 90%, 100% { opacity: 0; }
+      95% { opacity: 1; }
+    }
   </style>
 </head>
 <body>
+  <!-- Eyeballs that follow the cursor -->
+  <div class="eye-container">
+    <div class="eye">
+      <div class="pupil"></div>
+      <div class="eyelid"></div>
+    </div>
+    <div class="eye">
+      <div class="pupil"></div>
+      <div class="eyelid"></div>
+    </div>
+  </div>
+  
   <h1>Surveillance Artifacts - Modern World History</h1>
-
+  
   <!-- Overview Box -->
   <div class="overview-box">
     <h2>Overview</h2>
     <p>
-      Surveillance has shaped the way societies function, from early theories of control to the modern digital world. This exhibit explores how the idea of being watched has influenced behavior, governance, and technology. Starting with early concepts like the Panopticon and Big Brother, we move through the rise of mass surveillance tools like CCTV and digital monitoring and finally examine how surveillance has become a part of daily life, from smart technology to entertainment. To accurately identify the forms of power within this curation, we will be using the Foucaldian modalities of power and Cultural Anthropology terms. By tracing this progression, we ask: how has constant observation changed the way we live?
+      Surveillance has transformed modern society, influencing human behavior, security, and privacy.
+      This project explores surveillance’s impact through key artifacts, analyzing their significance within
+      Foucauldian theory and anthropology.
     </p>
   </div>
-
+  
   <!-- Loop through artifact groups -->
   {% for group in artifact_groups %}
   <div class="group-container">
@@ -177,17 +251,40 @@
   
   <!-- Live Camera Feed Section -->
   <div class="live-container">
-    <h2>You are being watched</h2>
+    <h2>Live Camera Feed</h2>
     <video class="live-video" autoplay playsinline muted></video>
+  </div>
+  
+  <!-- User Location Section -->
+  <div class="location-container">
+    <h2>Your General Location</h2>
+    <p id="city-text">Locating city...</p>
+    <p id="location-text">Locating coordinates...</p>
   </div>
   
   <div class="footer">
     <p>&copy; 2025 Max Blanksby | Atef Siddiqui | Modern World History - Surveillance and Anthropology</p>
   </div>
   
-  <!-- JavaScript to capture and display the live camera feed -->
+  <!-- JavaScript to capture live camera feed, user location, and eyeball movement -->
   <script>
     document.addEventListener('DOMContentLoaded', function(){
+      // Eyeball Movement Code
+      document.addEventListener('mousemove', function(event) {
+        document.querySelectorAll('.eye').forEach(function(eye) {
+          const pupil = eye.querySelector('.pupil');
+          const rect = eye.getBoundingClientRect();
+          const eyeX = rect.left + rect.width / 2;
+          const eyeY = rect.top + rect.height / 2;
+          const angle = Math.atan2(event.clientY - eyeY, event.clientX - eyeX);
+          const maxOffset = 10;
+          const offsetX = Math.cos(angle) * maxOffset;
+          const offsetY = Math.sin(angle) * maxOffset;
+          pupil.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        });
+      });
+      
+      // Live Camera Feed
       const liveVideo = document.querySelector('.live-video');
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true })
@@ -198,6 +295,36 @@
             console.error("Error accessing the camera:", error);
             liveVideo.outerHTML = '<p>Unable to access camera.</p>';
           });
+      }
+      
+      // Get User Location and City via Geolocation and Reverse Geocoding
+      const locationText = document.getElementById("location-text");
+      const cityText = document.getElementById("city-text");
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const lat = position.coords.latitude.toFixed(2);
+          const lon = position.coords.longitude.toFixed(2);
+          locationText.textContent = "Latitude: " + lat + ", Longitude: " + lon;
+          
+          // Use Nominatim API for reverse geocoding
+          fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+            .then(response => response.json())
+            .then(data => {
+              const address = data.address;
+              const city = address.city || address.town || address.village || address.hamlet || "Unknown location";
+              cityText.textContent = "City: " + city;
+            })
+            .catch(error => {
+              console.error("Error with reverse geocoding:", error);
+              cityText.textContent = "City: Unable to determine";
+            });
+        }, function(error) {
+          locationText.textContent = "Unable to retrieve your coordinates.";
+          cityText.textContent = "City: Unable to determine";
+        });
+      } else {
+        locationText.textContent = "Geolocation is not supported by your browser.";
+        cityText.textContent = "City: N/A";
       }
     });
   </script>
