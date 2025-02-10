@@ -44,6 +44,30 @@
       line-height: 1.6;
       text-shadow: 1px 1px 5px rgba(255,255,255,0.1);
     }
+    /* New Section Containers */
+    .keywords-container,
+    .conclusion-container,
+    .sources-container {
+      margin: 50px auto;
+      width: 80%;
+      max-width: 1200px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.10);
+      border-radius: 10px;
+      border: 2px solid rgba(255,255,255,0.2);
+      text-align: center;
+      color: #e0e0e0;
+      margin-bottom: 50px;
+    }
+    .keywords-container h2,
+    .conclusion-container h2,
+    .sources-container h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #ffcc70;
+      text-shadow: 2px 2px 10px rgba(255,204,112,0.8);
+    }
+    /* Artifact Group & Transition Styles */
     .group-container {
       margin: 50px auto;
       width: 80%;
@@ -139,6 +163,7 @@
       border: 2px solid rgba(255,255,255,0.2);
       text-align: center;
       color: #e0e0e0;
+      margin-bottom: 50px;
     }
     .location-container h2 {
       font-size: 2em;
@@ -220,8 +245,30 @@
   <div class="overview-box">
     <h2>Overview</h2>
     <p>
-      Surveillance has shaped how societies function, from early theories of control to the modern digital world. This exhibit explores how the idea of being watched has influenced behavior, governance, and technology. Starting with early concepts like the Panopticon and Big Brother, we move through the rise of mass surveillance tools like CCTV and digital monitoring and finally examine how surveillance has become a part of daily life, from smart technology to entertainment. To accurately identify the forms of power within this curation, we will use the Foucaldian modalities of power and Cultural Anthropology terms. By tracing this progression, we ask: how has constant observation changed the way we live?
+      Surveillance has transformed modern society, influencing human behavior, security, and privacy.
+      This project explores surveillance’s impact through key artifacts, analyzing their significance within
+      Foucauldian theory and anthropology.
     </p>
+  </div>
+  
+  <!-- Keywords and Definitions Section -->
+  <div class="keywords-container">
+    <h2>Keywords and Definitions</h2>
+    <p>Phrases Used: 
+
+      Disciplinary Power
+      Biopower
+      Sovereign Power
+      Pastoral Power
+      Symbolism 
+      Social Stratification
+      Political Socialization
+      Hegemony
+      Cultural Relativism
+      Authority and governance
+      Identity politics
+      Legitimacy 
+      </p>
   </div>
   
   <!-- Loop through artifact groups -->
@@ -247,6 +294,15 @@
   {% endif %}
   {% endfor %}
   
+  <!-- Conclusion Section -->
+  <div class="conclusion-container">
+    <h2>Conclusion</h2>
+    <p>Surveillance has evolved from a tool of discipline and control to an unavoidable part of modern life. What began as theoretical concepts like the Panopticon and Big Brother has expanded into widespread technological systems, from CCTV and body cams to smart surveillance and digital monitoring. As society becomes more accustomed to being watched—whether for security, convenience, or entertainment—the line between protection and intrusion continues to blur. This exhibit invites us to reflect on the consequences of constant observation: does it make us safer, or does it reshape our sense of freedom in ways we have yet to fully understand?
+
+      And as you stand here, reading these words, remember—this space is watching you too. The cameras, sensors, and digital logs embedded throughout the exhibit ensure that you are not just an observer but also the observed. In the end, surveillance is not just something we study—it is something we live with, whether we notice it or not
+      </p>
+  </div>
+  
   <!-- Live Camera Feed Section -->
   <div class="live-container">
     <h2>Live Camera Feed</h2>
@@ -258,6 +314,12 @@
     <h2>Your General Location</h2>
     <p id="city-text">Locating city...</p>
     <p id="location-text">Locating coordinates...</p>
+  </div>
+  
+  <!-- Sources Section (Now After Location Coordinates) -->
+  <div class="sources-container">
+    <h2>Sources</h2>
+    <p>Insert your sources here.</p>
   </div>
   
   <div class="footer">
