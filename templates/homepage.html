@@ -67,6 +67,23 @@
       color: #ffcc70;
       text-shadow: 2px 2px 10px rgba(255,204,112,0.8);
     }
+    /* Center paragraphs in these sections */
+    .keywords-container p,
+    .conclusion-container p,
+    .sources-container p {
+      white-space: pre-wrap;
+      line-height: 1.8;
+      margin-bottom: 1em;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    /* Also, center lists inside keywords */
+    .keywords-container ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 auto;
+      text-align: center;
+    }
     /* Artifact Group & Transition Styles */
     .group-container {
       margin: 50px auto;
@@ -245,30 +262,29 @@
   <div class="overview-box">
     <h2>Overview</h2>
     <p>
-      Surveillance has transformed modern society, influencing human behavior, security, and privacy.
-      This project explores surveillance’s impact through key artifacts, analyzing their significance within
-      Foucauldian theory and anthropology.
+      Surveillance has shaped how societies function, from early theories of control to the modern digital world. This exhibit explores how the idea of being watched has influenced behavior, governance, and technology. Starting with early concepts like the Panopticon and Big Brother, we move through the rise of mass surveillance tools like CCTV and digital monitoring and finally examine how surveillance has become a part of daily life, from smart technology to entertainment. To accurately identify the forms of power within this curation, we will use the Foucaldian modalities of power and Cultural Anthropology terms. By tracing this progression, we ask: how has constant observation changed the way we live?
     </p>
   </div>
   
-  <!-- Keywords and Definitions Section -->
+  <!-- Keywords and Definitions Section (Reverted Style) -->
   <div class="keywords-container">
     <h2>Keywords and Definitions</h2>
-    <p><ul style="list-style-type: none; padding: 0; margin: 0;">
-      <li><strong>Disciplinary Power</strong> – Control through surveillance, normalization, and self-regulation (Foucault).</li>
-      <li><strong>Biopower</strong> – Power over populations through policies on health, reproduction, and life itself.</li>
-      <li><strong>Sovereign Power</strong> – Absolute rule, often through laws and punishment.</li>
-      <li><strong>Pastoral Power</strong> – Power that guides and cares for individuals, like religious or state authority.</li>
-      <li><strong>Symbolism</strong> – The use of symbols to represent deeper meanings or concepts.</li>
-      <li><strong>Social Stratification</strong> – The ranking of people in a society based on status, wealth, or power.</li>
-      <li><strong>Political Socialization</strong> – The process by which people develop political beliefs and values.</li>
-      <li><strong>Hegemony</strong> – Dominance of one group’s ideology over others, shaping norms and beliefs.</li>
-      <li><strong>Cultural Relativism</strong> – Understanding cultures within their own context without judgment.</li>
-      <li><strong>Authority and Governance</strong> – Systems and structures that enforce rules and decision-making.</li>
-      <li><strong>Identity Politics</strong> – Political movements based on social identities like race, gender, or class.</li>
-      <li><strong>Legitimacy</strong> – The recognized right of a government or authority to rule.</li>
-    </ul>
-      </p>
+    <p>
+      <ul style="list-style-type: none; padding: 0; margin: 0 auto; text-align: center;">
+        <li><strong>Disciplinary Power</strong> – Control through surveillance, normalization, and self-regulation (Foucault).</li>
+        <li><strong>Biopower</strong> – Power over populations through policies on health, reproduction, and life itself.</li>
+        <li><strong>Sovereign Power</strong> – Absolute rule, often through laws and punishment.</li>
+        <li><strong>Pastoral Power</strong> – Power that guides and cares for individuals, like religious or state authority.</li>
+        <li><strong>Symbolism</strong> – The use of symbols to represent deeper meanings or concepts.</li>
+        <li><strong>Social Stratification</strong> – The ranking of people in a society based on status, wealth, or power.</li>
+        <li><strong>Political Socialization</strong> – The process by which people develop political beliefs and values.</li>
+        <li><strong>Hegemony</strong> – Dominance of one group’s ideology over others, shaping norms and beliefs.</li>
+        <li><strong>Cultural Relativism</strong> – Understanding cultures within their own context without judgment.</li>
+        <li><strong>Authority and Governance</strong> – Systems and structures that enforce rules and decision-making.</li>
+        <li><strong>Identity Politics</strong> – Political movements based on social identities like race, gender, or class.</li>
+        <li><strong>Legitimacy</strong> – The recognized right of a government or authority to rule.</li>
+      </ul>
+    </p>
   </div>
   
   <!-- Loop through artifact groups -->
@@ -297,10 +313,11 @@
   <!-- Conclusion Section -->
   <div class="conclusion-container">
     <h2>Conclusion</h2>
-    <p>Surveillance has evolved from a tool of discipline and control to an unavoidable part of modern life. What began as theoretical concepts like the Panopticon and Big Brother has expanded into widespread technological systems, from CCTV and body cams to smart surveillance and digital monitoring. As society becomes more accustomed to being watched—whether for security, convenience, or entertainment—the line between protection and intrusion continues to blur. This exhibit invites us to reflect on the consequences of constant observation: does it make us safer, or does it reshape our sense of freedom in ways we have yet to fully understand?
-
-      And as you stand here, reading these words, remember—this space is watching you too. The cameras, sensors, and digital logs embedded throughout the exhibit ensure that you are not just an observer but also the observed. In the end, surveillance is not just something we study—it is something we live with, whether we notice it or not
-      </p>
+    <p>
+      Surveillance has evolved from a tool of discipline and control to an unavoidable part of modern life. What began as theoretical concepts like the Panopticon and Big Brother has expanded into widespread technological systems—from CCTV and body cams to smart surveillance and digital monitoring. As society becomes more accustomed to being watched—whether for security, convenience, or entertainment—the line between protection and intrusion continues to blur. This exhibit invites us to reflect on the consequences of constant observation: does it make us safer, or does it reshape our sense of freedom in ways we have yet to fully understand?
+      
+      And as you stand here, reading these words, remember—this space is watching you too. The cameras, sensors, and digital logs embedded throughout the exhibit ensure that you are not just an observer but also the observed. In the end, surveillance is not just something we study—it is something we live with, whether we notice it or not.
+    </p>
   </div>
   
   <!-- Live Camera Feed Section -->
@@ -316,10 +333,48 @@
     <p id="location-text">Locating coordinates...</p>
   </div>
   
-  <!-- Sources Section (Now After Location Coordinates) -->
+  <!-- Sources Section -->
   <div class="sources-container">
     <h2>Sources</h2>
-    <p>Insert your sources here.</p>
+    <p>
+      Lowne, Cathy. 2019. “Big Brother | Fictional Character.” In Encyclopædia Britannica. https://www.britannica.com/topic/Big-Brother-fictional-character.
+      <br><br>
+      ‌Big. 2025. “1984’S Big Brother | Concept & Significance - Video | Study.com.” Study.com. 2025. https://study.com/learn/lesson/video/big-brother-is-watching-you.html.
+      <br><br>
+      ‌2025. Facebook.com. 2025. https://www.facebook.com/ObeyGiant/posts/big-brother-is-watching-you-is-a-reference-to-george-orwells-novel-1984-a-cautio/1159703859059051/.
+      <br><br>
+      Pathak, Ankita. 2024. “Big Brother in the 21st Century: How Orwell’s ‘1984’ Mirrors Our Society.” Medium. June 11, 2024. https://braincuddle.medium.com/big-brother-in-the-21st-century-how-orwells-1984-mirrors-our-society-5f38cf8b618c.
+      <br><br>
+      “Big Brother Is Watching You: Why Orwell’s Warning Is as Relevant as Ever.” n.d. Www.foliosociety.com. https://www.foliosociety.com/uk/blog/big-brother-is-watching-you-why-orwell-s-warning-is-as-relevant-as-ever.
+      <br><br>
+      “Jeremy Bentham’s ‘Perfect’ Prison | the Panopticon.” n.d. Www.youtube.com. Accessed October 4, 2023. https://www.youtube.com/watch?v=uO4hJVYEJ6I.
+      <br><br>
+      “Reddit - Dive into Anything.” 2022. Reddit.com. 2022. https://www.reddit.com/r/westworld/comments/vpuys3/the_panopticon_is_a_prison_designed_by/.
+      <br><br>
+      McMullan, Thomas. 2015. “What Does the Panopticon Mean in the Age of Digital Surveillance?” The Guardian. July 23, 2015. https://www.theguardian.com/technology/2015/jul/23/panopticon-digital-surveillance-jeremy-bentham.
+      <br><br>
+      Wikipedia Contributors. 2019. “Panopticon.” Wikipedia. Wikimedia Foundation. July 4, 2019. https://en.wikipedia.org/wiki/Panopticon.
+      <br><br>
+      ‌Wikipedia Contributors. 2020. “Big Brother (Nineteen Eighty-Four).” Wikipedia. Wikimedia Foundation. December 1, 2020. https://en.wikipedia.org/wiki/Big_Brother_%28Nineteen_Eighty-Four%29.
+      <br><br>
+      UCL. 2018. “The Panopticon.” Bentham Project. May 17, 2018. https://www.ucl.ac.uk/bentham-project/about-jeremy-bentham/panopticon.
+      <br><br>
+      UCL. 2018. “Panopticon Pandemonium: Bringing to Life Bentham’s Unrealised Prison.” Bentham Project. May 17, 2018. https://www.ucl.ac.uk/bentham-project/who-was-jeremy-bentham/panopticon/panopticon-pandemonium-bringing-life-benthams-unrealised-prison.
+      <br><br>
+      ‌‌The Editors of Encyclopedia Britannica. 2016. “Panopticon | Penal Architecture.” In Encyclopædia Britannica. https://www.britannica.com/technology/panopticon.
+      <br><br>
+      Brown University. 2009. “Internalized Authority and the Prison of the Mind: Bentham and Foucault’s Panopticon.” Brown.edu. 2009. https://www.brown.edu/Departments/Joukowsky_Institute/courses/13things/7121.html.
+      <br><br>
+      “SparkNotes: 1984: Big Brother.” 2019. Sparknotes.com. 2019. https://www.sparknotes.com/lit/1984/character/big-brother/.
+      <br><br>
+      “Big Brother (Nineteen Eighty-Four).” 2019. Villains Wiki. 2019. https://villains.fandom.com/wiki/Big_Brother_%28Nineteen_Eighty-Four%29.
+      <br><br>
+      ‌Quan, Emily. 2022. “Sigma: Journal of Political and International Studies Sigma: Journal of Political and International Studies Censorship Sensing: The Capabilities and Implications of China’s Censorship Sensing: The Capabilities and Implications of China’s Great Firewall under Xi Jinping Great Firewall under Xi Jinping.” Sigma: Journal of Political and International Studies 39: 4. https://scholarsarchive.byu.edu/cgi/viewcontent.cgi?article=1312&context=sigma.
+      <br><br>
+      Internet Society. 2023. “The Chinese Firewall.” Internet Society. December 1, 2023. https://www.internetsociety.org/resources/internet-fragmentation/the-chinese-firewall/.
+      <br><br>
+      “Susume! Denpa Shônen.” 1992. IMDb. July 5, 1992. https://www.imdb.com/title/tt1252219/.
+    </p>
   </div>
   
   <div class="footer">
